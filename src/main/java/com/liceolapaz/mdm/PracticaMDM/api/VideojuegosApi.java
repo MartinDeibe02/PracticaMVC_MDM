@@ -36,6 +36,10 @@ public class VideojuegosApi {
 	
 	@GetMapping("/{id}")
 	public Videojuego buscarTodoId(@PathVariable("id") int id){
+		Videojuego a = videojuegosService.findById(id);
+		
+		a.getSucursalAssoc();
+		System.out.println(a.getSucursalAssoc().get(0).getCantidad());
 		return videojuegosService.findById(id);
 	}
 	
@@ -65,7 +69,6 @@ public class VideojuegosApi {
 		suc.setId(8);
 		
 		
-		System.out.println(prueba.find(suc,vid));
 		return null;
 	}
 }

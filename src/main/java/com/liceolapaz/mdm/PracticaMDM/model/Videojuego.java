@@ -1,20 +1,15 @@
 package com.liceolapaz.mdm.PracticaMDM.model;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -31,8 +26,7 @@ public class Videojuego {
 	private int pegi;	
 	
 	@OneToMany(mappedBy = "videojuego", cascade = CascadeType.ALL)
-    private Set<VideoJuegoSucursal> sucursalAssoc = new HashSet<>();
-    
+    private List<VideoJuegoSucursal> sucursalAssoc = new ArrayList<VideoJuegoSucursal>();
 
 	public Integer getId() {
 		return id;
@@ -67,6 +61,18 @@ public class Videojuego {
 	
 	public void addsucursal(VideoJuegoSucursal vidSuc) {
 		this.sucursalAssoc.add(vidSuc);
+	}
+	
+	
+	
+
+	@JsonIgnore
+	public List<VideoJuegoSucursal> getSucursalAssoc() {
+		return sucursalAssoc;
+	}
+	
+	public void setSucursalAssoc(List<VideoJuegoSucursal> sucursalAssoc) {
+		this.sucursalAssoc = sucursalAssoc;
 	}
 	@Override
 	public String toString() {

@@ -32,34 +32,32 @@ public class VideojuegoSucursalService implements IVideojuegoSucursalService {
 	}
 
 	@Override
-	public VideoJuegoSucursal find(Sucursal sucursal1, Videojuego videojuego1) {
-		
-		
-		Optional<Sucursal> sucursal = sucursalRepo.findById(sucursal1.getId());
-		Optional<Videojuego> videojuego = videojuegosRepo.findById(videojuego1.getId());
-		if(sucursal.isPresent() && videojuego.isPresent()) {
+	public void find(Videojuego videojuego) {
 			
-			Optional<VideoJuegoSucursal> vidSuc = Optional.of(vidSurRep.findBySucursalAndVideojuego(sucursal.get(), videojuego.get()));
+		if(videojuegosRepo.findByNombre(videojuego.getNombre())!=null) {
+			VideoJuegoSucursal videoJuegoSuc = new VideoJuegoSucursal();
+			videoJuegoSuc.setVideojuego(videojuego);
+			//videoJuegoSuc.setSucursal(sucursal);
+			videoJuegoSuc.setCantidad(1);
+			vidSurRep.save(videoJuegoSuc);
+		}else {
+		/*	Optional<VideoJuegoSucursal> vidSuc = Optional.of(vidSurRep.findBySucursalAndVideojuego(sucursal, videojuego));
 			VideoJuegoSucursal v = null;
 			if(vidSuc.isPresent()) {
 				v = vidSuc.get();
-				System.out.println(vidSuc.get());
 				int cant = v.getCantidad();
-				v.setCantidad(cant+1);
-			}		
-			
-			return v;
-		}else {
-			VideoJuegoSucursal videoJuegoSuc = new VideoJuegoSucursal();
-			videoJuegoSuc.setVideojuego(videojuego1);
-			videoJuegoSuc.setSucursal(sucursal1);
-			vidSurRep.save(videoJuegoSuc);
+				v.setCantidad(cant+1);*/
 		}
-		return null;
-
-
+		
+			
+			
+	
 	}
-	
-	
+	}
 
+	@Override
+	public void find(Sucursal idSucursal, Videojuego idVideojuego) {
+		// TODO Auto-generated method stub
+		
+	}
 }

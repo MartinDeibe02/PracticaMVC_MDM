@@ -45,6 +45,7 @@ public class VideoJuegoSucursal{
 		return "VideoJuegoSucursal [videojuego=" + videojuego + ", sucursal=" + sucursal + ", cantidad=" + cantidad
 				+ "]";
 	}
+	
     
     
 	

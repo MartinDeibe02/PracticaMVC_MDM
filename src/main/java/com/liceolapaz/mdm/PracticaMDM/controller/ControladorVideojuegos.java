@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.liceolapaz.mdm.PracticaMDM.model.Sucursal;
 import com.liceolapaz.mdm.PracticaMDM.model.VideoJuegoSucursal;
@@ -26,47 +27,32 @@ public class ControladorVideojuegos {
 	ISucursalService sucursalService;
 	
 	@Autowired
-	IVideojuegoSucursalService vids;
+	IVideojuegoSucursalService vidsuc;
 	
 	
 	@GetMapping("/insertGame")
 	public String insertGame(Videojuego videojuego) {
 		
-		Videojuego juego = new Videojuego();
-		juego.setNombre("Prueba5");
-		juego.setGenero("Prueba");
-		juego.setPrecio(144);
-		juego.setPegi(13);
-		
-		Sucursal sucursal = new Sucursal();
-		
-		sucursal.setDireccion("Prueba");
-		sucursal.setNumSucursal(121299837);
-		sucursal.setCiudad("Se me va a ir la cabeza");
-		System.out.println(sucursal);
-		System.out.println("CIUDAD: " + sucursal.getCiudad());
-		
-		
-		VideoJuegoSucursal a = new VideoJuegoSucursal();
-		a.setVideojuego(juego);
-		a.setSucursal(sucursal);
-		a.setCantidad(1);
-		
-		juego.addsucursal(a);
-		
-		videojuegosService.guardar(juego);
-		
-		System.out.println(videojuegosService.buscarTodas());
-		
 		return "videojuegos/formVideojuegos";
 	}
 	
 	@PostMapping("/saveVideojuego")
-	public String guardar(Videojuego videojuego) {
-		videojuegosService.guardar(videojuego);
-				
+	public String guardar(Videojuego videojuego, @RequestParam("sucursal") int id) {
+		//videojuegosService.guardar(videojuego);
+		System.out.println(videojuego);
 		
-		return "redirect:videojuegos/formVideojuegos";
+		Sucursal sucursal = sucursalService.findById(id);
+		
+		System.out.println(sucursal);
+		VideoJuegoSucursal vidSuc = new VideoJuegoSucursal();
+		vidSuc.setVideojuego(videojuego);
+		vidSuc.setSucursal(sucursal);
+		vidSuc.setCantidad(1);
+		
+		videojuego.addsucursal(vidSuc);
+		
+		videojuegosService.guardar(videojuego);
+		return "redirect:/insertGame";
 	}
 	
 	@ModelAttribute

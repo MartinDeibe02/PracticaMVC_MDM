@@ -1,6 +1,7 @@
 package com.liceolapaz.mdm.PracticaMDM.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,14 @@ public class SucursalServiceImpl implements ISucursalService {
 	@Override
 	public void guardar(Sucursal sucursal) {
 		sucursalRepo.save(sucursal);
+	}
+
+	@Override
+	public Sucursal findById(Integer id) {
+		Optional<Sucursal> sucursaltemp = sucursalRepo.findById(id);
+		
+		Sucursal sucursal = sucursaltemp.get();
+		return sucursal;
 	}
 
 }
