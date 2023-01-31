@@ -35,13 +35,18 @@ public class VIdeojuegosServiceImpl implements IVideojuegosService {
 	}
 
 	@Override
-	public List<Videojuego> findByName(String name) {
+	public Videojuego findByName(String name) {
 		return videojuegosRepo.findByNombre(name);
 	}
 
 	@Override
 	public void deleteById(Integer id) {
 		videojuegosRepo.deleteById(id);
+	}
+
+	@Override
+	public void saveVidSuc(Videojuego videojuego) {
+		
 	}
 
 

@@ -44,7 +44,7 @@ public class VideojuegosApi {
 	}
 	
 	@GetMapping("/name/{nombre}")
-	public List<Videojuego> buscarNombre(@PathVariable("nombre") String nombre){
+	public Videojuego buscarNombre(@PathVariable("nombre") String nombre){
 		return videojuegosService.findByName(nombre);
 	}
 	

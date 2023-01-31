@@ -11,6 +11,8 @@ public interface IVideojuegosService{
 	Videojuego guardar(Videojuego videojuego);
 	List<Videojuego> buscarTodas();
 	Videojuego findById(int id);
-	List<Videojuego> findByName(String name);
+	Videojuego findByName(String name);
 	void deleteById(Integer id);
+	void saveVidSuc(Videojuego videojuego);
+	
 }

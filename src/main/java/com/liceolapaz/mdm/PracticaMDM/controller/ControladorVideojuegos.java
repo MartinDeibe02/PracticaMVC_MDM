@@ -38,20 +38,15 @@ public class ControladorVideojuegos {
 	
 	@PostMapping("/saveVideojuego")
 	public String guardar(Videojuego videojuego, @RequestParam("sucursal") int id) {
-		//videojuegosService.guardar(videojuego);
-		System.out.println(videojuego);
-		
 		Sucursal sucursal = sucursalService.findById(id);
 		
-		System.out.println(sucursal);
 		VideoJuegoSucursal vidSuc = new VideoJuegoSucursal();
 		vidSuc.setVideojuego(videojuego);
-		vidSuc.setSucursal(sucursal);
-		vidSuc.setCantidad(1);
-		
+		vidSuc.setSucursal(sucursal);		
 		videojuego.addsucursal(vidSuc);
 		
-		videojuegosService.guardar(videojuego);
+		vidsuc.prueba(vidSuc);
+		
 		return "redirect:/insertGame";
 	}
 	
