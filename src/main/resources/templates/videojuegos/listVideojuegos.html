@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Videojuegos</title>
+
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
+</head>
+<body>
+
+
+	<div class="card offset-lg-2 mt-5" style="width:1000px">
+		<h1 class="card-head text-primary">Listado de juegos</h1>
+		<div class="card-body">
+		<table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Genero</th>                  
+                  <th scope="col">Precio</th>
+                  <th scope="col">PEGI</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="videojuego: ${games}">
+                  <td th:text="${videojuego.nombre}"></td>                  
+                  <td th:text="${videojuego.genero}"></td>
+                  <td th:text="${videojuego.precio}"></td>
+                  <td th:text="${videojuego.pegi}"></td>
+                  <td> <a th:href="@{/delete/{id} (id=${videojuego.id})}" class="btn btn-danger btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i>Delete</a></td>
+                  <td> <a th:href="@{/mostrar/{nombre} (nombre=${videojuego.nombre})}" class="btn btn-danger btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i>Delete</a></td>
+                </tr>
+               
+                               
+              </tbody>
+            </table>
+            <a class="btn btn-primary" th:href="@{/insertGame}" title="Buscar juego" role="button"><i class="fas fa-file" aria-hidden="true"></i> Crear</a>            
+            
+            <a class="btn btn-primary" th:href="@{/videojuegos/encontrar}" title="Buscar juego" role="button"><i class="fas fa-file" aria-hidden="true"></i> Buscar</a>            
+            
+	</div>
+	</div>
+	
+	
+		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="@{/bootstrap/js/bootstrap.min.js}"></script>    
+    <script src="@{/tinymce/tinymce.min.js}"></script>
+
+</body>
+</html>

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import com.liceolapaz.mdm.PracticaMDM.model.Videojuego;
 import com.liceolapaz.mdm.PracticaMDM.service.IVideojuegoSucursalService;
 import com.liceolapaz.mdm.PracticaMDM.service.IVideojuegosService;
 import com.liceolapaz.mdm.PracticaMDM.service.VideojuegoSucursalService;
+
 
 @RestController
 @RequestMapping("/api")
@@ -51,6 +53,11 @@ public class VideojuegosApi {
 	@PostMapping("/save")
 	public ResponseEntity<Videojuego> guardar(@RequestBody Videojuego videojuego){
 		return new ResponseEntity<>(videojuegosService.guardar(videojuego), HttpStatus.OK);
+	}
+	
+	@PutMapping("/modify")
+	public Videojuego modify(@RequestBody Videojuego juego){
+		return videojuegosService.guardar(juego);
 	}
 	
 	@GetMapping("/delete/{id}")
