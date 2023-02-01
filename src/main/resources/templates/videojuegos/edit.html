@@ -14,11 +14,11 @@
 
 
 
-<div class="card offset-lg-2 mt-5" style="width:1000px">
+<div class="card offset-lg-2 d-flex align-content-center" style="width:1000px">
 
 	<h1 class="card-header text-primary">Crear Videojuego</h1>
 	<div class="card-body">
-	<form class="col-lg-9 offset-lg-3" th:action="@{/editGame}" method="post" th:object="${videojuego}">
+	<form class="" th:action="@{/editGame}" method="post" th:object="${videojuego}">
 	
         <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>
             Por favor corrija los errores del formulario
@@ -26,25 +26,26 @@
             		<li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
             	</ul>
         </div>   
-    <input type="hidden" th:field="*{id}">
-	<div class="col-md-6"> 
-	
-	<div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" th:field="*{nombre}" name="nombre" id="nombre" placeholder="Nombre" required="required">
-       </div>
+    <input type="hidden" th:field="*{id}">        
        
-       	<div class="form-group">
-                    <label for="nombre">Genero</label>
-                    <input type="text" class="form-control" th:field="*{genero}" name="genero" id="genero" placeholder="Genero" required="required">
-       </div>
-       
-       	<div class="form-group">
-                    <label for="nombre">Precio</label>
-                    <input type="number" class="form-control" th:field="*{precio}" name="precio" id="precio" placeholder="Precio" required="required">
-       </div>
-       
-       <div class="form-group">
+       <div class="tab-content">
+
+          <div id="nav-tab-card" class="tab-pane fade show active">
+            <form role="form">
+              <div class="form-group">
+                <label for="username">Nombre</label>
+                <input type="text" class="form-control" th:field="*{nombre}" name="nombre" id="nombre" placeholder="Nombre" required="required">
+              </div>
+              
+              <div class="form-group">
+                <label for="username">Genero</label>
+                <input type="text" class="form-control" th:field="*{genero}" name="genero" id="genero" placeholder="Genero" required="required">
+              </div>
+              
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label><span class="hidden-xs">Expiration</span></label>
                     <label for="pegi">PEGI</label>
                     <select class="form-control" name="pegi" id="pegi" th:field="*{pegi}">
 					  <option value="3">3</option>
@@ -55,11 +56,28 @@
                       <option value="18">18</option>	
                     </select>
         </div>
-        
-        
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group mb-4">
+                    <label data-toggle="tooltip" title="Three-digits code on the back of your card">CVV
+                                                <i class="fa fa-question-circle"></i>
+                                            </label>
+                    <input type="number" class="form-control" th:field="*{precio}" name="precio" id="precio" placeholder="Precio" required="required">
+                  </div>
+                </div>
+
+
+
+              </div>
+              <button type="submit" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"> Confirm  </button>
+            </form>
+          </div>
+       
+       
+       
+       
 
         </div>
-	  <button type="submit" class="btn btn-primary offset-lg-2 col-md-2">Submit</button>
 	
 	</form>
 	</div>

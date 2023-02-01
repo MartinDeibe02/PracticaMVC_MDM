@@ -10,41 +10,72 @@
     <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
 </head>
+
+<style>
+
+	html,
+	body,
+	.intro {
+	  height: 100%;
+	  background-color: #6095F0;
+	}
+	
+	table td,
+	table th {
+	  text-overflow: ellipsis;
+	  white-space: nowrap;
+	  overflow: hidden;
+	}
+	
+	.card {
+	  border-radius: .5rem;
+	}
+	
+</style>
+
 <body>
 
 
-	<div class="card offset-lg-2 mt-5" style="width:1000px">
-		<h1 class="card-head text-primary">Listado de juegos</h1>
-		<div class="card-body">
-		<table class="table table-hover">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Genero</th>                  
-                  <th scope="col">Precio</th>
-                  <th scope="col">PEGI</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="videojuego: ${games}">
-                  <td th:text="${videojuego.nombre}"></td>                  
-                  <td th:text="${videojuego.genero}"></td>
-                  <td th:text="${videojuego.precio}"></td>
-                  <td th:text="${videojuego.pegi}"></td>
-                  <td> <a th:href="@{/delete/{id} (id=${videojuego.id})}" class="btn btn-danger btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i>Delete</a></td>
-                  <td> <a th:href="@{/edit/{id} (id=${videojuego.id})}" class="btn btn-danger btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i>Delete</a></td>
-                </tr>
-               
-                               
-              </tbody>
-            </table>
-            <a class="btn btn-primary" th:href="@{/insertGame}" title="Buscar juego" role="button"><i class="fas fa-file" aria-hidden="true"></i> Crear</a>            
-            
-            <a class="btn btn-primary" th:href="@{/videojuegos/encontrar}" title="Buscar juego" role="button"><i class="fas fa-file" aria-hidden="true"></i> Buscar</a>            
-            
-	</div>
-	</div>
+    <section class="intro">
+        <div class="bg-image h-100" style="background-color: #6095F0;">
+            <div class="mask d-flex align-items-center h-100">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Nombre</th>
+									                  <th scope="col">Genero</th>                  
+									                  <th scope="col">Precio</th>
+									                  <th scope="col">PEGI</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                	<tr th:each="videojuego: ${games}">
+								                  <td th:text="${videojuego.nombre}"></td>                  
+								                  <td th:text="${videojuego.genero}"></td>
+								                  <td th:text="${videojuego.precio}"></td>
+								                  <td th:text="${videojuego.pegi}"></td>
+								                  <td> <a th:href="@{/delete/{id} (id=${videojuego.id})}" class="btn btn-danger btn-sm" role="button" title="Borrar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i>Delete</a></td>
+								                  <td> <a th:href="@{/edit/{id} (id=${videojuego.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i>Edit</a></td>
+								                </tr>
+                                            </tbody>
+                                        </table>
+                                           <a class="btn btn-primary" th:href="@{/insertGame}" title="Buscar juego" role="button"><i class="fas fa-file" aria-hidden="true"></i> Añadir videojuego</a>            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </section>
 	
 	
 		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
@@ -54,3 +85,4 @@
 
 </body>
 </html>
+
