@@ -38,7 +38,7 @@ public class ControladorVideojuegos {
 		return "videojuegos/formVideojuegos";
 	}
 	
-	@GetMapping("/list")
+	@GetMapping("/")
 	public String gamesList(Videojuego videojuego) {
 		
 		return "videojuegos/listVideojuegos";
@@ -47,21 +47,39 @@ public class ControladorVideojuegos {
 	@PostMapping("/saveVideojuego")
 	public String guardar(Videojuego videojuego, @RequestParam("sucursal") int id) {
 		Sucursal sucursal = sucursalService.findById(id);
-		
 		VideoJuegoSucursal vidSuc = new VideoJuegoSucursal();
 		vidSuc.setVideojuego(videojuego);
 		vidSuc.setSucursal(sucursal);		
 		videojuego.addsucursal(vidSuc);
 		
-		vidsuc.guardar(vidSuc);
+		//vidsuc.guardar(vidSuc);
 		
-		return "redirect:/insertGame";
+		if(vidsuc.prueba(vidSuc)) {
+			return "redirect:/insertGame";
+
+		}else {
+			return "videojuegos/error";
+		}
+		
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String deleteById(@PathVariable("id") Integer id){
 		videojuegosService.deleteById(id);
-		return "redirect:/list";
+		return "redirect:/";
+	}
+	
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") Integer id, Model model){
+		Videojuego v = videojuegosService.findById(id);
+		model.addAttribute(v);
+		return "videojuegos/edit";
+	}
+	
+	@PostMapping("/editGame")
+	public String saveEdit(Videojuego videojuego){
+		videojuegosService.guardar(videojuego);
+		return "redirect:/";
 	}
 	
 	

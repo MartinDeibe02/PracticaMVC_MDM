@@ -6,6 +6,6 @@ import com.liceolapaz.mdm.PracticaMDM.model.Videojuego;
 
 public interface IVideojuegoSucursalService {
 	void guardar(VideoJuegoSucursal videojuegoSucursal);
-	void prueba(Sucursal idSucursal, Videojuego idVideojuego);
+	boolean prueba(VideoJuegoSucursal videojuegoSucursal);
 
 }

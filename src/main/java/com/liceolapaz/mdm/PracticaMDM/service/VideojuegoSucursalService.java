@@ -36,7 +36,7 @@ public class VideojuegoSucursalService implements IVideojuegoSucursalService {
 		Optional<Videojuego> v = Optional.ofNullable(videojuegosRepo.findByNombre(vid.getNombre()));
 		Optional<Sucursal> s = Optional.of(sucursalRepo.findByNumSucursal(suc.getNumSucursal()));
 		
-		if(v.isPresent() && s.isPresent()) {
+		if(v.isPresent()) {
 			System.out.println("EXISTE");
 			
 			Videojuego juego = v.get();
@@ -69,8 +69,26 @@ public class VideojuegoSucursalService implements IVideojuegoSucursalService {
 	}
 
 	@Override
-	public void prueba(Sucursal idSucursal, Videojuego idVideojuego) {
-		// TODO Auto-generated method stub
+	public boolean prueba(VideoJuegoSucursal videojuegoSucursal) {
+		Videojuego vid = videojuegoSucursal.getVideojuego();
+		Sucursal suc = videojuegoSucursal.getSucursal();
+		
+		System.out.println(vid + " " + suc);
+		
+		Optional<Videojuego> v = Optional.ofNullable(videojuegosRepo.findByNombre(vid.getNombre()));
+		Optional<Sucursal> s = Optional.of(sucursalRepo.findByNumSucursal(suc.getNumSucursal()));
+		
+		if(!(v.isPresent())) {
+			videojuegoSucursal.setCantidad(1);
+			vid.getSucursalAssoc().clear();
+			vid.addsucursal(videojuegoSucursal);
+			System.out.println(vid);
+			videojuegosRepo.save(vid);
+			
+			return true;
+		}else {
+			return false;
+		}
 		
 	}
 

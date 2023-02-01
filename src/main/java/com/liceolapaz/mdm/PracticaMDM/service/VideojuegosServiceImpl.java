@@ -10,7 +10,7 @@ import com.liceolapaz.mdm.PracticaMDM.model.Videojuego;
 import com.liceolapaz.mdm.PracticaMDM.repository.VideojuegosRepository;
 
 @Service
-public class VIdeojuegosServiceImpl implements IVideojuegosService {
+public class VideojuegosServiceImpl implements IVideojuegosService {
 
 	@Autowired
 	VideojuegosRepository videojuegosRepo;

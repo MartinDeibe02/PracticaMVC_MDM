@@ -19,7 +19,7 @@ import com.liceolapaz.mdm.PracticaMDM.model.Videojuego;
 import com.liceolapaz.mdm.PracticaMDM.service.ISucursalService;
 import com.liceolapaz.mdm.PracticaMDM.service.IVideojuegosService;
 import com.liceolapaz.mdm.PracticaMDM.service.SucursalServiceImpl;
-import com.liceolapaz.mdm.PracticaMDM.service.VIdeojuegosServiceImpl;
+import com.liceolapaz.mdm.PracticaMDM.service.VideojuegosServiceImpl;
 
 
 @Controller
