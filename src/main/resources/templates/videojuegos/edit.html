@@ -34,10 +34,8 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Features</a>
-      <a class="nav-item nav-link" href="#">Pricing</a>
-      <a class="nav-item nav-link disabled" href="#">Disabled</a>
+      <a class="nav-item nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/insertGame">Crear Videojuego</a>
     </div>
   </div>
 </nav>
@@ -51,14 +49,9 @@
 
                             <h1 class="card-header text-primary">Editar Videojuego</h1>
                             <div class="card-body">
-                                <form class="" th:action="@{/editSucursal}" method="post" th:object="${videojuego}">
+                                <form class="" th:action="@{/editGame}" method="POST" th:object="${videojuego}">
 
-                                    <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>
-                                        Por favor corrija los errores del formulario
-                                        <ul>
-                                            <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
-                                        </ul>
-                                    </div>
+                                 
                                     <input type="hidden" th:field="*{id}" name="id">
 
                                     <div class="tab-content">
