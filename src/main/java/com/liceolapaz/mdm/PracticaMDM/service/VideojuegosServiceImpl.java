@@ -54,6 +54,13 @@ public class VideojuegosServiceImpl implements IVideojuegosService {
 		videojuegosRepo.deleteById(id);
 	}
 
+	@Override
+	public void deleteAllById(List<Integer> array) {
+		for(int i = 0; i<array.size();i++) {
+			videojuegosRepo.deleteById(array.get(i));
+		}
+	}
+
 
 
 

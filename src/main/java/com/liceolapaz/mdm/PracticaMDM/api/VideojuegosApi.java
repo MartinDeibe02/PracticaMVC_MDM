@@ -38,10 +38,6 @@ public class VideojuegosApi {
 	
 	@GetMapping("/{id}")
 	public Videojuego buscarTodoId(@PathVariable("id") int id){
-		Videojuego a = videojuegosService.findById(id);
-		
-		a.getSucursalAssoc();
-		System.out.println(a.getSucursalAssoc().get(0).getCantidad());
 		return videojuegosService.findById(id);
 	}
 	
@@ -65,17 +61,13 @@ public class VideojuegosApi {
 		videojuegosService.deleteById(id);
 		return "Eliminado";
 	}
-	
-	@GetMapping("/prueba")
-	public VideoJuegoSucursal prueba(){
-		
-		Videojuego vid = new Videojuego();
-		vid.setId(12);
-		
-		Sucursal suc = new Sucursal();
-		suc.setId(8);
-		
-		
-		return null;
+
+	@GetMapping("/deleteList/{array}")
+	public String test(@PathVariable List<Integer> array)
+	{
+		System.out.println(array);
+		videojuegosService.deleteAllById(array);
+		return "Eliminadas " + array; 
 	}
+
 }

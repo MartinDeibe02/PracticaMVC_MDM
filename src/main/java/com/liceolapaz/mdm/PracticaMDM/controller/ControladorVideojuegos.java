@@ -66,7 +66,7 @@ public class ControladorVideojuegos {
 		return "redirect:/";
 	}
 	
-	@PostMapping("/edit/{id}")
+	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, Model model){
 		Videojuego v = videojuegosService.findById(id);
 		List<VideoJuegoSucursal> vxs = v.getSucursalAssoc();

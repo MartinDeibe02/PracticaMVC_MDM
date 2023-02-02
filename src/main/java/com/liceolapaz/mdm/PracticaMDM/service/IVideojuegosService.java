@@ -1,5 +1,6 @@
 package com.liceolapaz.mdm.PracticaMDM.service;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -13,5 +14,8 @@ public interface IVideojuegosService{
 	Videojuego findById(int id);
 	Videojuego findByName(String name);
 	void deleteById(Integer id);
+	void deleteAllById(List<Integer> array);
+		
+	
 	
 }
