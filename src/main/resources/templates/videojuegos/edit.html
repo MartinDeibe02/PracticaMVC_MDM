@@ -19,9 +19,28 @@
 	  height: 100%;
 	  background-color: #6095F0;
 	}
+	
+	body{
+		padding: 0;
+	}
 </style>
 
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">Features</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+      <a class="nav-item nav-link disabled" href="#">Disabled</a>
+    </div>
+  </div>
+</nav>
 
     <section class="intro">
         <div class="d-flex align-items-center h-100">
@@ -88,7 +107,7 @@
                                                     </div>
 
                                                     <div class="card-body">
-                                                    	<a >+ Añadir sucursal</a>
+                                                    	<a th:href="@{/addSucursal/{idVid} (idVid=${id})}"  >+ Añadir sucursal</a>
                                                         <table class="table table-hover" th:object="${sucursal}">
                                                         
                                                             <thead class="thead-light">
@@ -106,7 +125,6 @@
 	                                                                    <td th:text="${vxt.sucursal.direccion}" id="direccion" name="direccion"></td>
 	                                                                    <td th:text="${vxt.sucursal.ciudad}" id="ciudad" name="ciudad"></td>
 	                                                                    <td name="cantidad" type="number" th:text="${vxt.cantidad}"> </td>
-	                                                                    <td> <a th:href="@{/editSucursal/{idSuc}/{idVid} (idSuc=${vxt.sucursal.id}, idVid=${vxt.videojuego.id})}" class="btn btn-info btn-sm" role="button" title="Borrar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i>Edit</a></td>
 	                                                                    
                                                                 </tr>
 

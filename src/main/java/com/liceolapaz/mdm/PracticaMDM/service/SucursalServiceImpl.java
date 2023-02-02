@@ -33,4 +33,9 @@ public class SucursalServiceImpl implements ISucursalService {
 		return sucursal;
 	}
 
+	@Override
+	public Sucursal findByName(int name) {
+		return sucursalRepo.findByNumSucursal(name);
+	}
+
 }

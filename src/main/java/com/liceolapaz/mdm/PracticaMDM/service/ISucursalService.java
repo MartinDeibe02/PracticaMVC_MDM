@@ -8,4 +8,5 @@ public interface ISucursalService {
 	List<Sucursal> buscarTodas();
 	void guardar(Sucursal sucursal);
 	Sucursal findById(Integer id);
+	Sucursal findByName(int name);
 }

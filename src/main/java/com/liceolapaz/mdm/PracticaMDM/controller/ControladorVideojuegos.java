@@ -40,7 +40,6 @@ public class ControladorVideojuegos {
 	
 	@GetMapping("/")
 	public String gamesList(Videojuego videojuego) {
-		
 		return "videojuegos/listVideojuegos";
 	}
 	
@@ -51,11 +50,9 @@ public class ControladorVideojuegos {
 		vidSuc.setVideojuego(videojuego);
 		vidSuc.setSucursal(sucursal);		
 		videojuego.addsucursal(vidSuc);
-		
-		//vidsuc.guardar(vidSuc);
-		
+				
 		if(vidsuc.prueba(vidSuc)) {
-			return "redirect:/insertGame";
+			return "redirect:/";
 
 		}else {
 			return "videojuegos/error";
@@ -80,28 +77,12 @@ public class ControladorVideojuegos {
 		return "videojuegos/edit";
 	}
 	
+	
 	@PostMapping("/editGame")
 	public String saveEdit(Videojuego videojuego){
 		videojuegosService.guardar(videojuego);
 		return "redirect:/";
 	}	
-	
-	
-	@GetMapping("/mostrar/{nombre}")
-	public String deleteById(@PathVariable("nombre") String nombre, Model model){
-		Videojuego v = videojuegosService.findByName(nombre);
-		model.addAttribute("videojuego", v);
-		List<VideoJuegoSucursal> vxs = v.getSucursalAssoc();
-		
-		List<Sucursal> s = new  ArrayList<>();
-		for(int i = 0; i<vxs.size();i++) {
-			s.add(vxs.get(i).getSucursal());
-		}
-		System.out.println(v.getSucursalAssoc());
-		model.addAttribute("lista2", s);
-		
-		return "videojuegos/detalle";
-	}
 	
 	
 	@ModelAttribute

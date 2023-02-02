@@ -28,6 +28,7 @@ public class VideojuegoSucursalService implements IVideojuegoSucursalService {
 
 	@Override
 	public void guardar(VideoJuegoSucursal videojuegoSucursal) {
+		System.out.println(videojuegoSucursal);
 		vidSurRep.save(videojuegoSucursal);
 
 	}
@@ -37,7 +38,6 @@ public class VideojuegoSucursalService implements IVideojuegoSucursalService {
 		Videojuego vid = videojuegoSucursal.getVideojuego();
 		Sucursal suc = videojuegoSucursal.getSucursal();
 		
-		System.out.println(vid + " " + suc);
 		
 		Optional<Videojuego> v = Optional.ofNullable(videojuegosRepo.findByNombre(vid.getNombre()));
 		Optional<Sucursal> s = Optional.of(sucursalRepo.findByNumSucursal(suc.getNumSucursal()));
@@ -57,7 +57,7 @@ public class VideojuegoSucursalService implements IVideojuegoSucursalService {
 	}
 
 	@Override
-	public VideoJuegoSucursal find(int v, int s) {
+	public VideoJuegoSucursal find(int v, int s, int cant) {
 		Optional<Videojuego> vidTemp = videojuegosRepo.findById(v);
 		Optional<Sucursal> sucTemp = sucursalRepo.findById(s);
 		
@@ -66,8 +66,15 @@ public class VideojuegoSucursalService implements IVideojuegoSucursalService {
 			Sucursal suc = sucTemp.get();
 			return vidSurRep.findBySucursalAndVideojuego(suc, vid);
 
+		}else {
+			Videojuego vid = vidTemp.get();
+			Sucursal suc = sucTemp.get();
+			VideoJuegoSucursal vxt = new VideoJuegoSucursal();
+			vxt.setVideojuego(vid);
+			vxt.setSucursal(suc);
+			
+			return vidSurRep.save(vxt);
 		}
-		return null;
 
 	}
 

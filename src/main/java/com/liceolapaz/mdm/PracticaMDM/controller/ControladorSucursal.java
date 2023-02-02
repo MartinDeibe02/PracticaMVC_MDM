@@ -39,24 +39,52 @@ public class ControladorSucursal {
 	
 	@GetMapping("/editSucursal/{idSuc}/{idVid}")
 	public String editSucursal(VideoJuegoSucursal videojuegoSucursal, @PathVariable("idSuc") int idSuc, @PathVariable("idVid") int idVid, Model model){
-		VideoJuegoSucursal vxt = vidsuc.find(idVid, idSuc);
+		VideoJuegoSucursal vxt = vidsuc.find(idVid, idSuc,0);
 		model.addAttribute("vxt", vxt);
 		
 		return "sucursal/formSucursal";
-	}
-
+	}	
 	
+	
+	@GetMapping("/addSucursal/{idVid}")
+	public String addSucursal(@PathVariable("idVid") int idVid, Model model){
+		
+		Videojuego v = videojuegoService.findById(idVid);
+		model.addAttribute("videojuego",v);
+		System.out.println(v);
+		return "sucursal/addSucursal";
+	}
+	
+	@PostMapping("/saveAddSucursal")
+	public String saveAddSucursal(@RequestParam("id") int idVid, @RequestParam("sucursal") int suc, @RequestParam("cant") int cant){
+		Videojuego v = videojuegoService.findById(idVid);
+		Sucursal s = sucursalService.findByName(suc);
+		
+		VideoJuegoSucursal vxt = new VideoJuegoSucursal();
+		vxt.setVideojuego(v);
+		vxt.setSucursal(s);
+		vxt.setCantidad(cant);
+		System.out.println(vxt);
+		vidsuc.guardar(vxt);
+		
+		return "redirect:/";
+	}
+		
 	@PostMapping("/saveSucursal")
 	public String guardar(VideoJuegoSucursal vidSuc) {
-		System.out.println(vidSuc);
-		
-		VideoJuegoSucursal newVid = vidsuc.find(vidSuc.getVideojuego().getId(), vidSuc.getSucursal().getId());
-		
+	
+		VideoJuegoSucursal newVid = vidsuc.find(vidSuc.getVideojuego().getId(), vidSuc.getSucursal().getId(), vidSuc.getCantidad());
 		newVid.setCantidad(vidSuc.getCantidad());
-		
 		vidsuc.guardar(newVid);
 		
 		return "redirect:/";
 	}
 
+	
+	
+	@ModelAttribute
+	public void setGenericos(Model model) {
+		List<Sucursal> lista = sucursalService.buscarTodas();
+		model.addAttribute("lista", lista);
+	}
 }
