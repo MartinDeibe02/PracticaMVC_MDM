@@ -1,5 +1,6 @@
 package com.liceolapaz.mdm.PracticaMDM.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,13 +24,15 @@ public class Sucursal {
 	private String direccion;
 	
 	@OneToMany(mappedBy = "sucursal")
-    private Set<VideoJuegoSucursal> videojuegoAssoc = new HashSet<>();
+    private List<VideoJuegoSucursal> videojuegoAssoc = new ArrayList<VideoJuegoSucursal>();
 	
 	
-	public Set<VideoJuegoSucursal> getVideojuegoAssoc() {
+	
+	
+	public List<VideoJuegoSucursal> getVideojuegoAssoc() {
 		return videojuegoAssoc;
 	}
-	public void setVideojuegoAssoc(Set<VideoJuegoSucursal> videojuegoAssoc) {
+	public void setVideojuegoAssoc(List<VideoJuegoSucursal> videojuegoAssoc) {
 		this.videojuegoAssoc = videojuegoAssoc;
 	}
 	public Integer getId() {

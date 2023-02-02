@@ -6,7 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.liceolapaz.mdm.PracticaMDM.model.Sucursal;
+import com.liceolapaz.mdm.PracticaMDM.model.VideoJuegoSucursal;
 import com.liceolapaz.mdm.PracticaMDM.model.Videojuego;
+import com.liceolapaz.mdm.PracticaMDM.repository.SucursalRepository;
 import com.liceolapaz.mdm.PracticaMDM.repository.VideojuegosRepository;
 
 @Service
@@ -14,6 +17,13 @@ public class VideojuegosServiceImpl implements IVideojuegosService {
 
 	@Autowired
 	VideojuegosRepository videojuegosRepo;
+	
+	@Autowired
+	SucursalRepository sucRepo;
+	
+	@Autowired 
+	VideojuegoSucursalService vidSucRep;
+	
 	
 	@Override
 	public Videojuego guardar(Videojuego videojuego) {
@@ -44,10 +54,9 @@ public class VideojuegosServiceImpl implements IVideojuegosService {
 		videojuegosRepo.deleteById(id);
 	}
 
-	@Override
-	public void saveVidSuc(Videojuego videojuego) {
-		
-	}
+
+
+
 
 
 

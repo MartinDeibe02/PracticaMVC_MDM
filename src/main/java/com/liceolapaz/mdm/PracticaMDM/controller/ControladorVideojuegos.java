@@ -72,6 +72,10 @@ public class ControladorVideojuegos {
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, Model model){
 		Videojuego v = videojuegosService.findById(id);
+		List<VideoJuegoSucursal> vxs = v.getSucursalAssoc();
+		
+		
+		model.addAttribute("vxt",vxs);
 		model.addAttribute(v);
 		return "videojuegos/edit";
 	}
@@ -80,7 +84,7 @@ public class ControladorVideojuegos {
 	public String saveEdit(Videojuego videojuego){
 		videojuegosService.guardar(videojuego);
 		return "redirect:/";
-	}
+	}	
 	
 	
 	@GetMapping("/mostrar/{nombre}")

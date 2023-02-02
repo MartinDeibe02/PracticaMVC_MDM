@@ -13,6 +13,5 @@ public interface IVideojuegosService{
 	Videojuego findById(int id);
 	Videojuego findByName(String name);
 	void deleteById(Integer id);
-	void saveVidSuc(Videojuego videojuego);
 	
 }

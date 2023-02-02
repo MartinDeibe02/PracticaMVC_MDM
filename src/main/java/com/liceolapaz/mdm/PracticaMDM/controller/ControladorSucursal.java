@@ -9,16 +9,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.liceolapaz.mdm.PracticaMDM.model.Sucursal;
+import com.liceolapaz.mdm.PracticaMDM.model.VideoJuegoSucursal;
 import com.liceolapaz.mdm.PracticaMDM.model.Videojuego;
 import com.liceolapaz.mdm.PracticaMDM.service.ISucursalService;
 import com.liceolapaz.mdm.PracticaMDM.service.IVideojuegosService;
 import com.liceolapaz.mdm.PracticaMDM.service.SucursalServiceImpl;
+import com.liceolapaz.mdm.PracticaMDM.service.VideojuegoSucursalService;
 import com.liceolapaz.mdm.PracticaMDM.service.VideojuegosServiceImpl;
 
 
@@ -29,19 +32,31 @@ public class ControladorSucursal {
 	
 	@Autowired
 	ISucursalService sucursalService;
+	
+	@Autowired
+	VideojuegoSucursalService vidsuc;
 
 	
-	@GetMapping("/insertSucursal")
-	public String insertSucursal(Sucursal sucursal) {
+	@GetMapping("/editSucursal/{idSuc}/{idVid}")
+	public String editSucursal(VideoJuegoSucursal videojuegoSucursal, @PathVariable("idSuc") int idSuc, @PathVariable("idVid") int idVid, Model model){
+		VideoJuegoSucursal vxt = vidsuc.find(idVid, idSuc);
+		model.addAttribute("vxt", vxt);
+		
 		return "sucursal/formSucursal";
 	}
-	
 
 	
 	@PostMapping("/saveSucursal")
-	public String guardar(Sucursal sucursal) {
-		sucursalService.guardar(sucursal);
-		return "redirect:/insertSucursal";
+	public String guardar(VideoJuegoSucursal vidSuc) {
+		System.out.println(vidSuc);
+		
+		VideoJuegoSucursal newVid = vidsuc.find(vidSuc.getVideojuego().getId(), vidSuc.getSucursal().getId());
+		
+		newVid.setCantidad(vidSuc.getCantidad());
+		
+		vidsuc.guardar(newVid);
+		
+		return "redirect:/";
 	}
 
 }

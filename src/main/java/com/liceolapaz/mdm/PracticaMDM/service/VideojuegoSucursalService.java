@@ -28,43 +28,7 @@ public class VideojuegoSucursalService implements IVideojuegoSucursalService {
 
 	@Override
 	public void guardar(VideoJuegoSucursal videojuegoSucursal) {
-		Videojuego vid = videojuegoSucursal.getVideojuego();
-		Sucursal suc = videojuegoSucursal.getSucursal();
-		
-		System.out.println(vid + " " + suc);
-		
-		Optional<Videojuego> v = Optional.ofNullable(videojuegosRepo.findByNombre(vid.getNombre()));
-		Optional<Sucursal> s = Optional.of(sucursalRepo.findByNumSucursal(suc.getNumSucursal()));
-		
-		if(v.isPresent()) {
-			System.out.println("EXISTE");
-			
-			Videojuego juego = v.get();
-			Sucursal sucursal = s.get();
-			
-			Optional<VideoJuegoSucursal> vs = Optional.ofNullable(vidSurRep.findBySucursalAndVideojuego(sucursal, juego));
-			if(vs.isPresent()) {
-				VideoJuegoSucursal vxt = vs.get();
-				System.out.println("CANTIDAD ANTES " +vxt.getCantidad());
-				vxt.setCantidad(vxt.getCantidad()+1);
-				System.out.println("CANTIDAD DESPUES " + vxt.getCantidad());
-				guardar(vxt);
-				
-			}else{
-				System.out.println("AAAAAAAAA");
-				videojuegoSucursal.setVideojuego(juego);
-				videojuegoSucursal.setSucursal(sucursal);
-				videojuegoSucursal.setCantidad(1);
-				vidSurRep.save(videojuegoSucursal);
-			}
-			
-		}else {
-			videojuegoSucursal.setCantidad(1);
-			vid.getSucursalAssoc().clear();
-			vid.addsucursal(videojuegoSucursal);
-			System.out.println(vid);
-			videojuegosRepo.save(vid);
-		}
+		vidSurRep.save(videojuegoSucursal);
 
 	}
 
@@ -90,6 +54,21 @@ public class VideojuegoSucursalService implements IVideojuegoSucursalService {
 			return false;
 		}
 		
+	}
+
+	@Override
+	public VideoJuegoSucursal find(int v, int s) {
+		Optional<Videojuego> vidTemp = videojuegosRepo.findById(v);
+		Optional<Sucursal> sucTemp = sucursalRepo.findById(s);
+		
+		if(vidTemp.isPresent() && sucTemp.isPresent()) {
+			Videojuego vid = vidTemp.get();
+			Sucursal suc = sucTemp.get();
+			return vidSurRep.findBySucursalAndVideojuego(suc, vid);
+
+		}
+		return null;
+
 	}
 
 
