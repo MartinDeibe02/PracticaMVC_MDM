@@ -67,6 +67,7 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col" class="text-center">Nombre</th>
+                                                    <th scope="col" class="text-center">Fabricante</th>
 									                  <th scope="col" class="text-center">Genero</th>                  
 									                  <th scope="col" class="text-center">Precio</th>
 									                  <th scope="col" class="text-center">PEGI</th>
@@ -77,6 +78,7 @@
                                             <tbody>
                                                 	<tr  class="text-center" th:each="videojuego: ${games}">
 								                  <td class="text-center" th:text="${videojuego.nombre}"></td>                  
+								                  <td class="text-center" th:text="${videojuego.fabricante}"></td>                  
 								                  <td class="text-center" th:text="${videojuego.genero}"></td>
 								                  <td class="text-center" th:text="${videojuego.precio}"></td>
 								                  <td class="text-center" th:text="${videojuego.pegi}"></td>

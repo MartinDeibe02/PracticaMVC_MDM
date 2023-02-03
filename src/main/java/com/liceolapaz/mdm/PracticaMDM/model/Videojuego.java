@@ -21,6 +21,7 @@ public class Videojuego {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
+	private String fabricante;
 	private String genero;
 	private double precio;
 	private int pegi;	
@@ -39,6 +40,12 @@ public class Videojuego {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}	
+	public String getFabricante() {
+		return fabricante;
+	}
+	public void setFabricante(String fabricante) {
+		this.fabricante = fabricante;
 	}
 	public String getGenero() {
 		return genero;
@@ -62,9 +69,6 @@ public class Videojuego {
 	public void addsucursal(VideoJuegoSucursal vidSuc) {
 		this.sucursalAssoc.add(vidSuc);
 	}
-	
-	
-	
 
 	@JsonIgnore
 	public List<VideoJuegoSucursal> getSucursalAssoc() {
