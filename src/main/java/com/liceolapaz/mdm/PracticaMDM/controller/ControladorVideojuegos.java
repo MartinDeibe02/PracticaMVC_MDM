@@ -44,7 +44,7 @@ public class ControladorVideojuegos {
 	}
 	
 	@PostMapping("/saveVideojuego")
-	public String guardar(Videojuego videojuego, @RequestParam("sucursal") int id) {
+	public String guardar(Videojuego videojuego, @RequestParam("sucursal") int id,  Model model) {
 		Sucursal sucursal = sucursalService.findById(id);
 		VideoJuegoSucursal vidSuc = new VideoJuegoSucursal();
 		vidSuc.setVideojuego(videojuego);
@@ -53,8 +53,9 @@ public class ControladorVideojuegos {
 				
 		if(vidsuc.prueba(vidSuc)) {
 			return "redirect:/";
-
+			
 		}else {
+			model.addAttribute("error", "Ya existe este videojuego");
 			return "videojuegos/error";
 		}
 		
@@ -69,8 +70,12 @@ public class ControladorVideojuegos {
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, Model model){
 		Videojuego v = videojuegosService.findById(id);
-		List<VideoJuegoSucursal> vxs = v.getSucursalAssoc();
 		
+		if(v == null) {
+			model.addAttribute("error", "No existe este videojuego");
+			return "videojuegos/error";
+		}
+		List<VideoJuegoSucursal> vxs = v.getSucursalAssoc();
 		
 		model.addAttribute("vxt",vxs);
 		model.addAttribute(v);

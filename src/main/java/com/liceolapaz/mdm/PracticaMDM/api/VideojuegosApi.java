@@ -33,6 +33,7 @@ public class VideojuegosApi {
 	
 	@GetMapping("/")
 	public List<Videojuego> buscarTodos(){
+		System.out.println(videojuegosService.buscarTodas());
 		return videojuegosService.buscarTodas();
 	}
 	
