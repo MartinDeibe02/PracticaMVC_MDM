@@ -11,6 +11,7 @@ import com.liceolapaz.mdm.PracticaMDM.model.VideoJuegoSucursal;
 import com.liceolapaz.mdm.PracticaMDM.model.Videojuego;
 import com.liceolapaz.mdm.PracticaMDM.repository.SucursalRepository;
 import com.liceolapaz.mdm.PracticaMDM.repository.VideojuegosRepository;
+import com.liceolapaz.mdm.PracticaMDM.repository.VideojuegosSucursalRepository;
 
 @Service
 public class VideojuegosServiceImpl implements IVideojuegosService {
@@ -22,7 +23,7 @@ public class VideojuegosServiceImpl implements IVideojuegosService {
 	SucursalRepository sucRepo;
 	
 	@Autowired 
-	VideojuegoSucursalService vidSucRep;
+	VideojuegosSucursalRepository vidSucRep;
 	
 	
 	@Override
@@ -59,6 +60,7 @@ public class VideojuegosServiceImpl implements IVideojuegosService {
 		for(int i = 0; i<array.size();i++) {
 			videojuegosRepo.deleteById(array.get(i));
 		}
+		
 	}
 
 

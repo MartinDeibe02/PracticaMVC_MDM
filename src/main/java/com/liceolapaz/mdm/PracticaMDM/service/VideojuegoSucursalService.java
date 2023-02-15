@@ -1,5 +1,6 @@
 package com.liceolapaz.mdm.PracticaMDM.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.internal.build.AllowSysOut;
@@ -76,6 +77,17 @@ public class VideojuegoSucursalService implements IVideojuegoSucursalService {
 			return vidSurRep.save(vxt);
 		}
 
+	}
+
+	@Override
+	public Integer getSum() {
+		List<VideoJuegoSucursal> vids = vidSurRep.findAll();
+		int i = 0;
+		for(VideoJuegoSucursal v : vids) {
+			i += v.getCantidad();
+		}
+		
+		return i;
 	}
 
 

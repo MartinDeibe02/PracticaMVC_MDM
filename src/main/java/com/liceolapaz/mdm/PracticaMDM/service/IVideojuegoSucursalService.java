@@ -8,5 +8,5 @@ public interface IVideojuegoSucursalService {
 	void guardar(VideoJuegoSucursal videojuegoSucursal);
 	boolean prueba(VideoJuegoSucursal videojuegoSucursal);
 	VideoJuegoSucursal find(int v, int s, int cant);
-
+	Integer getSum();
 }

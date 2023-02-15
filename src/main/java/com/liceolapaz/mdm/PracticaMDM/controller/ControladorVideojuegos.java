@@ -39,7 +39,10 @@ public class ControladorVideojuegos {
 	}
 	
 	@GetMapping("/")
-	public String gamesList(Videojuego videojuego) {
+	public String gamesList(Videojuego videojuego, Model model) {
+		int sum = vidsuc.getSum();
+		model.addAttribute("sum", sum);
+		
 		return "videojuegos/listVideojuegos";
 	}
 	

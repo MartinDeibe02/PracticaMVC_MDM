@@ -76,7 +76,6 @@ public class ControladorSucursal {
 		VideoJuegoSucursal newVid = vidsuc.find(vidSuc.getVideojuego().getId(), vidSuc.getSucursal().getId(), vidSuc.getCantidad());
 		newVid.setCantidad(vidSuc.getCantidad());
 		vidsuc.guardar(newVid);
-		
 		return "redirect:/";
 	}
 

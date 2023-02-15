@@ -14,8 +14,7 @@ public interface IVideojuegosService{
 	Videojuego findById(int id);
 	Videojuego findByName(String name);
 	void deleteById(Integer id);
-	void deleteAllById(List<Integer> array);
-		
+	void deleteAllById(List<Integer> array);	
 	
 	
 }
